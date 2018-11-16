@@ -12,6 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LZTitleLabel : UILabel
 
+@property (nonatomic, assign) CFTimeInterval animationDuration;
+
+@property (nonatomic, assign) CFTimeInterval titleScaleDuration;
+
+- (void)touchDownAnimation;
+
+- (void)hideLabelAnimation:(void (^)(void))hideComplete;
+
+- (void)showLabelAnimation:(BOOL)success;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LZProgressView : UIView
 
+@property (nonatomic, strong) UIColor *lz_tintColor;
+
+@property (nonatomic, assign) CGFloat progressTrackWidth;
+
+@property (nonatomic, strong) UIColor *progressColor;
+
+@property (nonatomic, strong) UIColor *progressTrackColor;
+
+@property (nonatomic, strong) UIColor *progressFillColor;
+
+@property (nonatomic, assign) CGFloat progress;
+
+- (void)resetProgress;
+
 @end
 
 NS_ASSUME_NONNULL_END
