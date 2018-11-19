@@ -8,123 +8,87 @@
 
 #import "ViewController.h"
 #import "CircularProgressButton.h"
+#import "AFNetworking.h"
 
-@interface ViewController (){
-    NSInteger i;
-}
+@interface ViewController ()
 
-@property (nonatomic, strong) CADisplayLink *timer;
-
-//@property (nonatomic, assign) CGFloat newProgress;
-
-@property (nonatomic, assign) NSInteger completedUnitCount;
-
-@property (nonatomic, strong) NSProgress *progress;
+@property (nonatomic, strong) CircularProgressButton *progressButton;
 
 @end
 
-@implementation ViewController{
-    CircularProgressButton *sub;
+static AFHTTPSessionManager *manager = nil;
+
+@implementation ViewController
+
+- (AFHTTPSessionManager*)shareInstance {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [AFHTTPSessionManager manager];
+    });
+    return manager;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self newSubmitView];
+    [self creatProgressButton];
 }
 
-- (void)newSubmitView {
-    
-    self.progress = [NSProgress progressWithTotalUnitCount:1000];
+- (void)creatProgressButton {
     
     __weak typeof(self) weakSelf = self;
-    sub = [[CircularProgressButton alloc] initWithFrame:CGRectMake(0, 0, 300, 80) touchUpInsideBlock:^{
-        [weakSelf startProgress];
+    _progressButton = [[CircularProgressButton alloc] initWithFrame:CGRectMake(0, 0, 300, 80) touchUpInsideBlock:^{
+        [weakSelf beginDownLoad];
     }];
-//    sub.title = @"test button";
-//    sub.titleFont = [UIFont systemFontOfSize:22.0f];
-//    sub.titleColor = [UIColor magentaColor];
-//    sub.tintColor = [UIColor purpleColor];
-//    sub.progressColor = [UIColor orangeColor];
-//    sub.progressTrackColor = [UIColor blackColor];
-//    sub.progressFillColor = [UIColor cyanColor];
-//    sub.progressTrackWidth = 10.0f;
-//    sub.cornerRadius = 10.0f;
-//    sub.animationDuration = 0.5f;
-//    sub.titleScaleDuration = 2.0f;
-    sub.progress = self.progress;
-    sub.center = self.view.center;
-    [self.view addSubview:sub];
+//    _progressButton.title = @"test button";
+//    _progressButton.titleFont = [UIFont systemFontOfSize:22.0f];
+//    _progressButton.titleColor = [UIColor magentaColor];
+//    _progressButton.tintColor = [UIColor purpleColor];
+//    _progressButton.progressColor = [UIColor orangeColor];
+//    _progressButton.progressTrackColor = [UIColor blackColor];
+//    _progressButton.progressFillColor = [UIColor cyanColor];
+//    _progressButton.progressTrackWidth = 10.0f;
+//    _progressButton.cornerRadius = 10.0f;
+//    _progressButton.animationDuration = 0.5f;
+//    _progressButton.titleScaleDuration = 2.0f;
+//    _progressButton.progress = self.progress;
+    _progressButton.center = self.view.center;
+    [self.view addSubview:_progressButton];
 }
 
 - (IBAction)click:(id)sender {
-    [sub removeFromSuperview];
-    [self newSubmitView];
+    [_progressButton removeFromSuperview];
+    [self creatProgressButton];
 }
 
-- (void)startProgress{
-    [self startTimer];
-}
-
-- (void)startTimer{
-    if (_timer) {
-        return;
-    }
-    
-    i = arc4random() % 2;
-    //    self.newProgress = 0.0f;
-    self.completedUnitCount = 0;
-    
-    _timer = [CADisplayLink displayLinkWithTarget:self selector:@selector(timerEvent)];
-    [_timer addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-}
-
-- (void)stopTimer{
-    if (!_timer) {
-        return;
-    }
-    [_timer invalidate];
-    _timer = nil;
-}
-
-- (void)timerEvent{
-    
-    //    self.newProgress += 0.01f;
-    //
-    //    if (i == 0) {
-    //        if (self.newProgress >= 0.4) {
-    //            [self stopTimer];
-    //            [sub doError];
-    //            return;
-    //        }
-    //    }
-    //    else{
-    //        if (self.newProgress >= 1.0f) {
-    //            [self stopTimer];
-    //            [sub doSuccess];
-    //            return;
-    //        }
-    //    }
-    //
-    //    sub.progressValue = self.newProgress;
-    
-    self.completedUnitCount += 10;
-    
-    if (i == 0) {
-        if (self.completedUnitCount >= 400) {
-            [self stopTimer];
-            [sub doError];
-            return;
-        }
-    }
-    else{
-        if (self.completedUnitCount >= 1000) {
-            [self stopTimer];
-            [sub doSuccess];
-            return;
-        }
-    }
-    
-    self.progress.completedUnitCount = self.completedUnitCount;
+- (void)beginDownLoad{
+    __weak typeof(self) weakSelf = self;
+    AFHTTPSessionManager *mgr = [self shareInstance];
+    NSURLSessionDownloadTask *downLoadTask = [mgr downloadTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dldir1.qq.com/qqfile/QQforMac/QQ_V6.5.2.dmg"]]
+                                                                 progress:^(NSProgress * _Nonnull downloadProgress) {
+                                                                     
+                                                                     //this block (progress) is called on the session queue, not the main queue.
+                                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                                         weakSelf.progressButton.progressValue = downloadProgress.fractionCompleted;
+                                                                     });
+                                                                     
+                                                                 }
+                                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+                                                                  
+                                                                  NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+                                                                  return [NSURL fileURLWithPath:filePath];
+                                                                  
+                                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+                                                                  
+                                                                  if (error) {
+                                                                      NSLog(@"error = %@",error);
+                                                                      [weakSelf.progressButton doError];
+                                                                  }
+                                                                  else{
+                                                                      [weakSelf.progressButton doSuccess];
+                                                                  }
+                                                                  
+                                                              }];
+    [downLoadTask resume];
 }
 
 - (void)didReceiveMemoryWarning {
