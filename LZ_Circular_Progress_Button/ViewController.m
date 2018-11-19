@@ -29,8 +29,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self newSubmitView];
+}
+
+- (void)newSubmitView {
+    
+    self.progress = [NSProgress progressWithTotalUnitCount:1000];
+    
+    __weak typeof(self) weakSelf = self;
+    sub = [[CircularProgressButton alloc] initWithFrame:CGRectMake(0, 0, 300, 80) touchUpInsideBlock:^{
+        [weakSelf startProgress];
+    }];
+//    sub.title = @"test button";
+//    sub.titleFont = [UIFont systemFontOfSize:22.0f];
+//    sub.titleColor = [UIColor magentaColor];
+//    sub.tintColor = [UIColor purpleColor];
+//    sub.progressColor = [UIColor orangeColor];
+//    sub.progressTrackColor = [UIColor blackColor];
+//    sub.progressFillColor = [UIColor cyanColor];
+//    sub.progressTrackWidth = 10.0f;
+//    sub.cornerRadius = 10.0f;
+//    sub.animationDuration = 0.5f;
+//    sub.titleScaleDuration = 2.0f;
+    sub.progress = self.progress;
+    sub.center = self.view.center;
+    [self.view addSubview:sub];
+}
+
+- (IBAction)click:(id)sender {
+    [sub removeFromSuperview];
+    [self newSubmitView];
+}
+
+- (void)startProgress{
+    [self startTimer];
 }
 
 - (void)startTimer{
@@ -93,31 +125,6 @@
     }
     
     self.progress.completedUnitCount = self.completedUnitCount;
-    
-}
-
-- (void)newSubmitView {
-    __weak typeof(self) weakSelf = self;
-    sub = [[CircularProgressButton alloc] initWithFrame:CGRectMake(0, 0, 300, 80) touchUpInsideBlock:^{
-        [weakSelf startTimer];
-    }];
-    //    sub.tintColor = [UIColor purpleColor];
-    //    sub.progressColor = [UIColor orangeColor];
-    //    sub.progressTrackColor = [UIColor blackColor];
-    //    sub.progressFillColor = [UIColor cyanColor];
-    //    sub.progressTrackWidth = 10.0f;
-    //    sub.cornerRadius = 10.0f;
-    //    sub.animationDuration = 0.5f;
-    //    sub.titleScaleDuration = 2.0f;
-    self.progress = [NSProgress progressWithTotalUnitCount:1000];
-    sub.progress = self.progress;
-    sub.center = self.view.center;
-    [self.view addSubview:sub];
-}
-
-- (IBAction)click:(id)sender {
-    [sub removeFromSuperview];
-    [self newSubmitView];
 }
 
 - (void)didReceiveMemoryWarning {

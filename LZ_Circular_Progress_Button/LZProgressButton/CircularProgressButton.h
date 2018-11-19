@@ -14,35 +14,81 @@ typedef void (^buttonClickBlock) (void);
 
 @interface CircularProgressButton : UIView
 
-@property (nonatomic, copy) NSString *title;
+/**
+ default is "Submit".
+ */
+@property (nullable, nonatomic, copy) NSString *title;
 
-@property (nonatomic, strong) UIColor *titleColor;
+/**
+ default is "[UIColor whiteColor]".
+ */
+@property (nullable, nonatomic, strong) UIColor *titleColor;
 
-@property (nonatomic, strong) UIFont *titleFont;
+/**
+ default is "[UIFont boldSystemFontOfSize:18]".
+ */
+@property (nullable, nonatomic, strong) UIFont *titleFont;
 
+/**
+ default is "0.5f".
+ */
 @property (nonatomic, assign) CFTimeInterval animationDuration;
 
+/**
+ default is "0.25f".
+ */
 @property (nonatomic, assign) CFTimeInterval titleScaleDuration;
 
-@property (nonatomic, strong) UIColor *tintColor;
+/**
+ default is "r:1.0/255.0 g:153.0/255.0 b:204.0/255.0 a:1.0".
+ */
+@property (nullable, nonatomic, strong) UIColor *tintColor;
 
+/**
+ default is "4.0f".
+ */
 @property (nonatomic, assign) CGFloat progressTrackWidth;
 
-@property (nonatomic, strong) UIColor *progressColor;
+/**
+ default is "tintColor".
+ */
+@property (nullable, nonatomic, strong) UIColor *progressColor;
 
-@property (nonatomic, strong) UIColor *progressTrackColor;
+/**
+ default is "r:222.0/255.0 g:222.0/255.0 b:222.0/255.0 a:1.0".
+ */
+@property (nullable, nonatomic, strong) UIColor *progressTrackColor;
 
-@property (nonatomic, strong) UIColor *progressFillColor;
+/**
+ default is "[UIColor whiteColor]".
+ */
+@property (nullable, nonatomic, strong) UIColor *progressFillColor;
 
+/**
+ default is "0.0f".
+ */
 @property (nonatomic, assign) CGFloat cornerRadius;
 
-@property (nonatomic, strong) UIColor *successCorlor;
+/**
+ default is "r:153.0/255.0 g:204.0/255.0 b:0.0/255.0 a:1.0".
+ */
+@property (nullable, nonatomic, strong) UIColor *successCorlor;
 
-@property (nonatomic, strong) UIColor *errorColor;
+/**
+ default is "r:255.0/255.0 g:68.0/255.0 b:68.0/255.0 a:1.0"
 
+ */
+@property (nullable, nonatomic, strong) UIColor *errorColor;
+
+/**
+ use "progressValue" or "progress", can't be used at the same time.
+ */
 @property (nonatomic, assign) CGFloat progressValue;
 
-@property (nonatomic, strong) NSProgress *progress;
+/**
+ use "progressValue" or "progress", can't be used at the same time.
+ */
+@property (nullable, nonatomic, strong) NSProgress *progress;
 
 - (instancetype)initWithFrame:(CGRect)frame touchUpInsideBlock:(void (^)(void))block;
 

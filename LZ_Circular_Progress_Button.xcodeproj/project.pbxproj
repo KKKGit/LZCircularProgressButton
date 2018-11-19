@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43B0D5BA5F50554CB4B078DD /* libPods-LZ_Circular_Progress_Button.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EC23E1CB3AC267879334E7 /* libPods-LZ_Circular_Progress_Button.a */; };
 		714F2EBF219EBEF700C12F50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F2EBE219EBEF700C12F50 /* AppDelegate.m */; };
 		714F2EC2219EBEF700C12F50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F2EC1219EBEF700C12F50 /* ViewController.m */; };
 		714F2EC7219EBF0100C12F50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714F2EC6219EBF0100C12F50 /* Assets.xcassets */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E49FA8331ECB7C5AF813D8 /* Pods-LZ_Circular_Progress_Button.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LZ_Circular_Progress_Button.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LZ_Circular_Progress_Button/Pods-LZ_Circular_Progress_Button.debug.xcconfig"; sourceTree = "<group>"; };
+		1E36BFEACFB740D53773AEA9 /* Pods-LZ_Circular_Progress_Button.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LZ_Circular_Progress_Button.release.xcconfig"; path = "Pods/Target Support Files/Pods-LZ_Circular_Progress_Button/Pods-LZ_Circular_Progress_Button.release.xcconfig"; sourceTree = "<group>"; };
 		714F2EBA219EBEF700C12F50 /* LZ_Circular_Progress_Button.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LZ_Circular_Progress_Button.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714F2EBD219EBEF700C12F50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		714F2EBE219EBEF700C12F50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -37,6 +40,7 @@
 		714F2EDD219EC08500C12F50 /* LZProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LZProgressView.h; sourceTree = "<group>"; };
 		714F2EDE219EC08500C12F50 /* LZProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LZProgressView.m; sourceTree = "<group>"; };
 		714F2EE0219EC0A100C12F50 /* LZDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LZDefines.h; sourceTree = "<group>"; };
+		F6EC23E1CB3AC267879334E7 /* libPods-LZ_Circular_Progress_Button.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LZ_Circular_Progress_Button.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,17 +48,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43B0D5BA5F50554CB4B078DD /* libPods-LZ_Circular_Progress_Button.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F18A6399674191FA1D4FD8A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04E49FA8331ECB7C5AF813D8 /* Pods-LZ_Circular_Progress_Button.debug.xcconfig */,
+				1E36BFEACFB740D53773AEA9 /* Pods-LZ_Circular_Progress_Button.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		714F2EB1219EBEF700C12F50 = {
 			isa = PBXGroup;
 			children = (
 				714F2EBC219EBEF700C12F50 /* LZ_Circular_Progress_Button */,
 				714F2EBB219EBEF700C12F50 /* Products */,
+				5F18A6399674191FA1D4FD8A /* Pods */,
+				D4E2F6ADDCCF0301A7862C4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +114,14 @@
 			path = LZProgressButton;
 			sourceTree = "<group>";
 		};
+		D4E2F6ADDCCF0301A7862C4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6EC23E1CB3AC267879334E7 /* libPods-LZ_Circular_Progress_Button.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -105,6 +129,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 714F2ED0219EBF0100C12F50 /* Build configuration list for PBXNativeTarget "LZ_Circular_Progress_Button" */;
 			buildPhases = (
+				29EF26E129797AE496CB9480 /* [CP] Check Pods Manifest.lock */,
 				714F2EB6219EBEF700C12F50 /* Sources */,
 				714F2EB7219EBEF700C12F50 /* Frameworks */,
 				714F2EB8219EBEF700C12F50 /* Resources */,
@@ -161,6 +186,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29EF26E129797AE496CB9480 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LZ_Circular_Progress_Button-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		714F2EB6219EBEF700C12F50 /* Sources */ = {
@@ -305,6 +351,7 @@
 		};
 		714F2ED1219EBF0100C12F50 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04E49FA8331ECB7C5AF813D8 /* Pods-LZ_Circular_Progress_Button.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -325,6 +372,7 @@
 		};
 		714F2ED2219EBF0100C12F50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E36BFEACFB740D53773AEA9 /* Pods-LZ_Circular_Progress_Button.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
