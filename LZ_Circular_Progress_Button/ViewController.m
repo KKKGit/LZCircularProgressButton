@@ -68,9 +68,16 @@ static AFHTTPSessionManager *manager = nil;
                                                                      
                                                                      //this block (progress) is called on the session queue, not the main queue.
                                                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                                                         weakSelf.progressButton.progressValue = downloadProgress.fractionCompleted;
+                                                                         
+                                                                         //set progress
+                                                                         if (!weakSelf.progressButton.progress) {
+                                                                             weakSelf.progressButton.progress = downloadProgress;
+                                                                         }
+                                                                         
+                                                                         //or set progressValue
+                                                                         //weakSelf.progressButton.progressValue = downloadProgress.fractionCompleted;
                                                                      });
-                                                                     
+                                                                
                                                                  }
                                                               destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
                                                                   

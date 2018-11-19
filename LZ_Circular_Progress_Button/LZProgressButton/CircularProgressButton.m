@@ -169,7 +169,9 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    self.progressValue = self.progress.fractionCompleted;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.progressValue = self.progress.fractionCompleted;
+    });
 }
 
 - (void)dealloc{
