@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) CircularProgressButton *progressButton;
 
+@property (nonatomic, assign) BOOL needsReset;
+
 @end
 
 static AFHTTPSessionManager *manager = nil;
@@ -30,6 +32,14 @@ static AFHTTPSessionManager *manager = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.view.frame = CGRectMake(
+                                 0,
+                                 0,
+                                 [UIScreen mainScreen].bounds.size.width,
+                                 [UIScreen mainScreen].bounds.size.height
+                                 );
+    
     [self creatProgressButton];
 }
 
@@ -55,12 +65,28 @@ static AFHTTPSessionManager *manager = nil;
     [self.view addSubview:_progressButton];
 }
 
-- (IBAction)click:(id)sender {
+- (IBAction)reset:(id)sender {
+    
+    [self setNeedsReset:YES];
+    
     [_progressButton removeFromSuperview];
+    _progressButton = nil;
+    [self cancel:nil];
+    
     [self creatProgressButton];
 }
 
+- (IBAction)cancel:(id)sender {
+    AFHTTPSessionManager *mgr = [self shareInstance];
+    [mgr.downloadTasks enumerateObjectsUsingBlock:^(NSURLSessionDownloadTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj cancel];
+    }];
+}
+
 - (void)beginDownLoad{
+
+    [self setNeedsReset:NO];
+    
     __weak typeof(self) weakSelf = self;
     AFHTTPSessionManager *mgr = [self shareInstance];
     NSURLSessionDownloadTask *downLoadTask = [mgr downloadTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dldir1.qq.com/qqfile/QQforMac/QQ_V6.5.2.dmg"]]
@@ -85,6 +111,10 @@ static AFHTTPSessionManager *manager = nil;
                                                                   return [NSURL fileURLWithPath:filePath];
                                                                   
                                                               } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+                                                                  
+                                                                  if (weakSelf.needsReset) {
+                                                                      return;
+                                                                  }
                                                                   
                                                                   if (error) {
                                                                       NSLog(@"error = %@",error);

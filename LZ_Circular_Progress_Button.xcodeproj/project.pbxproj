@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43B0D5BA5F50554CB4B078DD /* libPods-LZ_Circular_Progress_Button.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EC23E1CB3AC267879334E7 /* libPods-LZ_Circular_Progress_Button.a */; };
+		7136C6CA21A3ADFB004AD0D0 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7136C6C921A3ADFB004AD0D0 /* ViewController.xib */; };
 		714F2EBF219EBEF700C12F50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F2EBE219EBEF700C12F50 /* AppDelegate.m */; };
 		714F2EC2219EBEF700C12F50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F2EC1219EBEF700C12F50 /* ViewController.m */; };
 		714F2EC7219EBF0100C12F50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714F2EC6219EBF0100C12F50 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		04E49FA8331ECB7C5AF813D8 /* Pods-LZ_Circular_Progress_Button.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LZ_Circular_Progress_Button.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LZ_Circular_Progress_Button/Pods-LZ_Circular_Progress_Button.debug.xcconfig"; sourceTree = "<group>"; };
 		1E36BFEACFB740D53773AEA9 /* Pods-LZ_Circular_Progress_Button.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LZ_Circular_Progress_Button.release.xcconfig"; path = "Pods/Target Support Files/Pods-LZ_Circular_Progress_Button/Pods-LZ_Circular_Progress_Button.release.xcconfig"; sourceTree = "<group>"; };
+		7136C6C921A3ADFB004AD0D0 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		714F2EBA219EBEF700C12F50 /* LZ_Circular_Progress_Button.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LZ_Circular_Progress_Button.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714F2EBD219EBEF700C12F50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		714F2EBE219EBEF700C12F50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				714F2EBE219EBEF700C12F50 /* AppDelegate.m */,
 				714F2EC0219EBEF700C12F50 /* ViewController.h */,
 				714F2EC1219EBEF700C12F50 /* ViewController.m */,
+				7136C6C921A3ADFB004AD0D0 /* ViewController.xib */,
 				714F2ED3219EBF7100C12F50 /* LZProgressButton */,
 				714F2EC6219EBF0100C12F50 /* Assets.xcassets */,
 				714F2EC8219EBF0100C12F50 /* LaunchScreen.storyboard */,
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				714F2ECA219EBF0100C12F50 /* LaunchScreen.storyboard in Resources */,
+				7136C6CA21A3ADFB004AD0D0 /* ViewController.xib in Resources */,
 				714F2EC7219EBF0100C12F50 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

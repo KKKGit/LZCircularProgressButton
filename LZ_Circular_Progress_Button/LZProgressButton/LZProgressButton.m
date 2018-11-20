@@ -9,7 +9,12 @@
 #import "LZProgressButton.h"
 #import "LZDefines.h"
 
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
 @interface LZProgressButton () <CAAnimationDelegate>
+#else
+@interface LZProgressButton ()
+#endif
 
 @property (nonatomic, strong) UIColor *currentColor;
 

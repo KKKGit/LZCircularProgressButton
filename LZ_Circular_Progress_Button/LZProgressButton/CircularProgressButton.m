@@ -79,10 +79,18 @@
 }
 
 - (void)showResults:(BOOL)success {
+    
     self.progressView.hidden = YES;
     [self.progressView resetProgress];
+    [self resetProgress];
+    
     [self.progressButton showSubmitButton:success];
     [self.titleLabel showLabelAnimation:success];
+}
+
+- (void)resetProgress{
+    [_progress removeObserver:self forKeyPath:@"fractionCompleted"];
+    _progress = nil;
 }
 
 - (void)setTitle:(NSString *)title{
@@ -174,8 +182,13 @@
     });
 }
 
+- (void)removeFromSuperview{
+    [super removeFromSuperview];
+    [self.progressButton.layer removeAllAnimations];
+}
+
 - (void)dealloc{
-    [_progress removeObserver:self forKeyPath:@"fractionCompleted"];
+    [self resetProgress];
     NSLog(@"%s",__func__);
 }
 
