@@ -77,8 +77,7 @@ static AFHTTPSessionManager *manager = nil;
 }
 
 - (IBAction)cancel:(id)sender {
-    AFHTTPSessionManager *mgr = [self shareInstance];
-    [mgr.downloadTasks enumerateObjectsUsingBlock:^(NSURLSessionDownloadTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[self shareInstance].downloadTasks enumerateObjectsUsingBlock:^(NSURLSessionDownloadTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj cancel];
     }];
 }
@@ -88,43 +87,38 @@ static AFHTTPSessionManager *manager = nil;
     [self setNeedsReset:NO];
     
     __weak typeof(self) weakSelf = self;
-    AFHTTPSessionManager *mgr = [self shareInstance];
-    NSURLSessionDownloadTask *downLoadTask = [mgr downloadTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dldir1.qq.com/qqfile/QQforMac/QQ_V6.5.2.dmg"]]
-                                                                 progress:^(NSProgress * _Nonnull downloadProgress) {
-                                                                     
-                                                                     //this block (progress) is called on the session queue, not the main queue.
-                                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                                         
-                                                                         //set progress
-                                                                         if (!weakSelf.progressButton.progress) {
-                                                                             weakSelf.progressButton.progress = downloadProgress;
-                                                                         }
-                                                                         
-                                                                         //or set progressValue
-                                                                         //weakSelf.progressButton.progressValue = downloadProgress.fractionCompleted;
-                                                                     });
-                                                                
-                                                                 }
-                                                              destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-                                                                  
-                                                                  NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-                                                                  return [NSURL fileURLWithPath:filePath];
-                                                                  
-                                                              } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-                                                                  
-                                                                  if (weakSelf.needsReset) {
-                                                                      return;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dldir1.qq.com/qqfile/QQforMac/QQ_V6.5.2.dmg"]];
+    AFHTTPSessionManager *manager = [self shareInstance];
+    NSURLSessionDownloadTask *downLoadTask = [manager downloadTaskWithRequest:request
+                                                                     progress:^(NSProgress * _Nonnull downloadProgress) {
+                                                                         //this block (progress) is called on the session queue, not the main queue.
+                                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                                             
+                                                                             //set progress
+                                                                             if (!weakSelf.progressButton.progress) {
+                                                                                 weakSelf.progressButton.progress = downloadProgress;
+                                                                                 
+                                                                             }
+                                                                             //or set progressValue
+                                                                             //weakSelf.progressButton.progressValue = downloadProgress.fractionCompleted;
+                                                                         });
+                                                                     }
+                                                                  destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+                                                                      NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+                                                                      return [NSURL fileURLWithPath:filePath];
                                                                   }
-                                                                  
-                                                                  if (error) {
-                                                                      NSLog(@"error = %@",error);
-                                                                      [weakSelf.progressButton doError];
-                                                                  }
-                                                                  else{
-                                                                      [weakSelf.progressButton doSuccess];
-                                                                  }
-                                                                  
-                                                              }];
+                                                            completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+                                                                if (weakSelf.needsReset)
+                                                                    return;
+                                                                if (error) {
+                                                                    NSLog(@"error = %@",error);
+                                                                    [weakSelf.progressButton doError];
+                                                                }
+                                                                else{
+                                                                    [weakSelf.progressButton doSuccess];
+                                                                }
+                                                            }];
     [downLoadTask resume];
 }
 
